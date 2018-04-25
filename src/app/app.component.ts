@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {AComponent} from "./a/a.component";
 import {JitCompilerFactory} from "@angular/platform-browser-dynamic";
+import {DialogService} from "./component/dialog";
 
 
 export function createCompiler(compilerFactory: CompilerFactory) {
@@ -29,7 +30,7 @@ export class AppComponent {
   @ViewChild('container', {read: ViewContainerRef})
   protected mainContainer: ViewContainerRef;
 
-  constructor(private injector: Injector, private loader: NgModuleFactoryLoader, private compiler: Compiler) {
+  constructor(private injector: Injector, private loader: NgModuleFactoryLoader, private compiler: Compiler, private dialogService: DialogService) {
   }
 
   loadModule() {
@@ -73,5 +74,21 @@ export class AppComponent {
         const compRef = this.container.createComponent(factory);
         compRef.instance.name = 123;
       });
+  }
+
+  openModal() {
+    this.loader.load('./a/a.module#AModule').then((factory) => {
+      const module = factory.create(this.injector);
+      const r = module.componentFactoryResolver;
+      const cmpFactory = r.resolveComponentFactory(AComponent);
+
+      // create a component and attach it to the view
+      const componentRef = cmpFactory.create(this.injector);
+
+      const dialogRef = this.dialogService.create({
+        viewRef: componentRef.hostView,
+      });
+
+    });
   }
 }

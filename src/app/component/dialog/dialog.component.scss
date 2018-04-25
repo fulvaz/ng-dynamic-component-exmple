@@ -1,0 +1,112 @@
+$dialog-bg: #000;
+$dialog-header-color: #ddd;
+$dialog-body-color: #292b2c;
+$shadow-key-umbra-opacity: 0.2;
+$shadow-key-penumbra-opacity: 0.14;
+$shadow-ambient-shadow-opacity: 0.12;
+$shadow-3: 0 1px 8px 0 rgba(0, 0, 0, $shadow-key-umbra-opacity),
+0 3px 4px 0 rgba(0, 0, 0, $shadow-key-penumbra-opacity),
+0 3px 3px -2px rgba(0, 0, 0, $shadow-ambient-shadow-opacity);
+.ngx-dialog {
+  position: fixed;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  pointer-events: none;
+  .ngx-dialog-content {
+    pointer-events: auto;
+    border-radius: 2px;
+    box-shadow: $shadow-3;
+    background: #fff;
+    padding: 0 15px;
+    position: relative;
+    animation-fill-mode: forwards;
+    min-width: 500px;
+    max-width: 100%;
+    max-height: 75vh;
+    overflow: auto;
+    top: 20%;
+    .ngx-dialog-header {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      .ngx-dialog-title {
+        padding: 0 5px;
+        margin: 0;
+        flex: 1;
+        font-size: 16px;
+        text-align: center;
+        color: #333;
+        border: none;
+      }
+      .close {
+        position: absolute;
+        right: 15px;
+        margin: 0;
+        border: none;
+        cursor: pointer;
+        color: $dialog-header-color;
+        background: white;
+        span {
+          font-size: 16px;
+          font-weight: 100;
+          color: #333;
+        }
+      }
+    }
+    .ngx-dialog-body {
+      font-size: 13px;
+      color: $dialog-body-color;
+      min-height: 50px;
+    }
+    .ngx-dialog-footer {
+      text-align: right;
+      .btn {
+        margin-left: 5px;
+      }
+    }
+  }
+  @keyframes anim-open {
+    0% {
+      opacity: 0;
+      transform: scale3d(1.1, 1.1, 1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  @keyframes anim-close {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale3d(0.9, 0.9, 1);
+    }
+  }
+}
+
+.modal-backdrop{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 1039;
+}
+.modal-backdrop, .modal-content{
+  -webkit-animation-name: anim-open;
+  animation-name: anim-open;
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+}

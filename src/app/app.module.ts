@@ -4,6 +4,8 @@ import {Compiler, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader} from 
 
 import {AppComponent} from './app.component';
 import {RouterModule} from "@angular/router";
+import {DialogModule} from "./component/dialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -12,6 +14,8 @@ import {RouterModule} from "@angular/router";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    DialogModule,
     RouterModule.forRoot(
       [
         {
