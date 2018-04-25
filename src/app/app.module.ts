@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {Compiler, NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader} from '@angular/core';
 
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -10,9 +11,20 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(
+      [
+        {
+          path: 'a',
+          loadChildren: './a/a.module#AModule',
+        }
+      ]
+    )
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    {provide: NgModuleFactoryLoader, useClass: SystemJsNgModuleLoader},
+  ]
 })
-export class AppModule { }
+export class AppModule {
+}

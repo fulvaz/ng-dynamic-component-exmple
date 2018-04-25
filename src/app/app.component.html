@@ -17,4 +17,12 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul>
+<router-outlet></router-outlet>
 
+<div #container></div>
+
+<div #vc></div>
+
+<button (click)="loadModule()">使用loader导入渲染</button>
+<button (click)="manualCompile()">System.import导入用compiler渲染</button>
+<button (click)="renderTemplate()">compiler动态渲染模板（aot无效）</button>
